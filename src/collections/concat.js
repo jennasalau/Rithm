@@ -2,42 +2,22 @@
  * Returns a new array comprised of the array's parsed in
  * @param target
  * @param collection
- * @returns {*}
+ * @returns {Array}
  */
-const concat = (array) => {
+export function concat() {
 
+  var   args = arguments,
+        out = [];
 
-    var result = [];
+  var parseArray = a => {
+      for(var v of a) {
+          out.push(v);
+      }
+  };
 
-     var _copyValues = (innerArray) => {
+  for(var a of args) {
+      Array.isArray(a) ? parseArray(a) : out.push(a);
+  }
 
-        for(var x=0; x<innerArray.length;x++) {
-            result.push(innerArray[x]);
-        }
-
-    };
-
-
-
-    for(var i=0; i < arguments.length; i++) {
-
-        // Skip browserify cruft
-       if(typeof arguments[i] === 'object' || arguments[i].exports || arguments[i].__esModule) {
-        continue;
-       }
-
-        if(Array.isArray(arguments[i])) {
-            _copyValues(arguments[i]);
-
-        } else {
-            result.push(arguments[i]);
-        }
-
-    }
-
-
-
-    return result;
+  return out;
 };
-
-export default concat;

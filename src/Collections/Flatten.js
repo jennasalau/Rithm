@@ -5,33 +5,17 @@
  */
 let flatten = collection => {
 
-    // Check object can be iterated
-    if(!Array.isArray(collection)) {
-        return null;
-    }
-
-    var result = [];
+    var out = [];
 
     function _parse(n) {
-
-        if(!Array.isArray(n)){
-            return;
-        }
-
         for(var val of n) {
-
-            if(Array.isArray(val)) {
-                _parse(val);
-            }
-            else {
-                result.push(val);
-            }
+            Array.isArray(val) ? _parse(val) : out.push(val);
         }
     };
 
     _parse(collection);
 
-    return result;
+    return out;
 };
 
 export default flatten;
